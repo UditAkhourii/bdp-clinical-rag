@@ -7,16 +7,15 @@ readiness check.
 
 ## Readiness check (read first)
 
-**Do not submit yet.** The manuscript at `main.tex` is v0.2 — a defensible
-preprint draft, not a submittable one. Four blockers stand between v0.2 and
-the Submit button:
+The manuscript at `main.tex` is v0.2 — a defensible preprint draft. Status
+of the four blockers identified at the v0.1 stage:
 
-| # | Blocker | Fix |
+| # | Blocker | Status |
 |---|---|---|
-| 1 | Author block has placeholders: `[Surname]`, two `[Co-Author --- TBD]`, three `[Institution --- TBD]`, `[Initials]` | Decide whether to submit solo (then add co-authors at revision) or wait for co-authors to confirm |
-| 2 | GitHub URLs are `[org]/[repo]` placeholders | Push the SDK + eval to a public repo, update Data & Code Availability section in `main.tex` and the URL in this doc |
-| 3 | Figures 1–4 are `\fbox` caption stubs | Render in tldraw/excalidraw (Figs 1–2), matplotlib (Fig 3 from `results/results.json`), SDK screenshot (Fig 4); replace `\fbox{...}` with `\includegraphics{figures/figN.pdf}` |
-| 4 | All numbers in Tables 2–3 are bootstrap-scale (MiniLM, 20 patients) | Run `python -m corpus && python -m run && python -m ablate` with `SCALE=PAPER_SCALE` and `EMBED_BACKEND="openai"` in `config.py`; ~$30–80; ~2–4 h; replace table cells |
+| 1 | Author block placeholders | **Partially fixed.** First author = Udit Raj Akhouri, Brane Labs, udit@branelabs.org. Two co-author slots (clinical informaticist, ML/privacy methodologist) still TBD — decide whether to submit solo and add at revision, or wait. |
+| 2 | GitHub URLs were `[org]/[repo]` | ✅ **Fixed.** Code lives at <https://github.com/UditAkhourii/bdp-clinical-rag>, MIT licensed. Data & Code Availability paragraph in `main.tex` updated. |
+| 3 | Figures 1–4 were `\fbox` stubs | **Partially fixed.** Fig 3 is auto-rendered from real eval data (`figures/render_fig3.py`, output committed). Figs 1, 2, 4 still need to be created — see `figures/FIGURE_PROMPTS.md` for prompts/instructions. |
+| 4 | Bootstrap-scale numbers | **Accepted for preprint.** The bootstrap reproduction establishes the qualitative shape of every claim. Full-scale (1k patients / `text-embedding-3-large`) is planned for the first preprint revision and the eventual JAMIA submission. The abstract and §6.2 already frame the current numbers as bootstrap. |
 
 Optional but recommended before submission:
 - Run `python -m clinical_accuracy --backend anthropic --n 100` to fill the
@@ -90,11 +89,11 @@ Quality Improvement* — but Health Informatics is the right one.)
 
 **Data Availability Statement**
 
-> The reference implementation (TypeScript SDK) and the Python eval harness — including the BDP module (`bdp.py`), the deterministic synthetic-corpus generator (`corpus.py`), the four-pipeline benchmark (`pipelines.py`, `run.py`), the ablation runner (`ablate.py`), the clinical-accuracy grader (`clinical_accuracy.py`), and a dependency-free correctness test (`smoke_test.py`) — are released at https://github.com/[org]/[repo] under the MIT licence. The synthetic corpus is fully reproducible from a fixed seed (config.SEED = 42); running `python -m corpus && python -m run && python -m ablate` regenerates every number in Tables 2–3 byte-for-byte. Expected numbers and seeds are recorded in `results/results.json` and `results/ablation.json`.
+> The reference implementation (TypeScript SDK) and the Python eval harness — including the BDP module (`bdp.py`), the deterministic synthetic-corpus generator (`corpus.py`), the four-pipeline benchmark (`pipelines.py`, `run.py`), the ablation runner (`ablate.py`), the clinical-accuracy grader (`clinical_accuracy.py`), and a dependency-free correctness test (`smoke_test.py`) — are released at https://github.com/UditAkhourii/bdp-clinical-rag under the MIT licence. The synthetic corpus is fully reproducible from a fixed seed (config.SEED = 42); running `python -m corpus && python -m run && python -m ablate` regenerates every number in Tables 2–3 byte-for-byte. Expected numbers and seeds are recorded in `results/results.json` and `results/ablation.json`.
 
 **Data Availability Links**
 
-> https://github.com/[org]/[repo]
+> https://github.com/UditAkhourii/bdp-clinical-rag
 
 (One URL per line if you have multiple. Replace placeholder with the real
 repo URL the moment it's public.)
@@ -192,8 +191,10 @@ medRxiv generates a proof PDF; verify:
 2. Tables 1, 2, 3 render with the right column alignment.
 3. Every `\cite{}` resolves to a numbered reference and the bibliography
    has all 20 entries.
-4. Search the proof for the string `[` — flushes out any remaining
-   `[Surname]`, `[org]/[repo]`, `[Initials]` placeholders.
+4. Search the proof for the string `[Co-Author --- TBD]` and
+   `[Institution --- TBD]` — those are the only intentional placeholders
+   remaining. The `[org]/[repo]`, `[Surname]`, and `[Initials]` ones are
+   all fixed.
 5. Search for `placeholder` and `TBD` for the same reason.
 
 ---
