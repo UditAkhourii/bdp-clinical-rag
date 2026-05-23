@@ -98,11 +98,19 @@ randomized-token schemes share a single failure mode.
 produce silent, clinically meaningful retrieval failures while frequently
 leaving the underlying privacy goal unmet. We argue that symmetric
 write-and-read tokenization should be treated as the default; read-only
-schemes should be considered unsafe for clinical deployment. A reference
-implementation and the synthetic corpus are released to support
-reproduction.
+schemes should be considered unsafe for clinical deployment.
 
-\vspace{0.6em}
+\vspace{0.4em}
+\noindent\textbf{Code, data, and raw results:}
+\url{https://github.com/UditAkhourii/bdp-clinical-rag} (MIT licence).
+The corpus generator is deterministic from \texttt{SEED=42}; every
+number in this paper is regenerable byte-for-byte with one command
+(\texttt{python -m corpus \&\& python -m run \&\& python -m ablate}).
+Raw per-pipeline metrics: \texttt{results/results.json},
+\texttt{results/ablation.json},
+\texttt{results/clinical\_accuracy.json}.
+
+\vspace{0.4em}
 \noindent\textbf{Keywords:} clinical NLP; retrieval-augmented generation;
 de-identification; pseudonymization; DPDPA; HIPAA; vector search;
 patient-safety AI.
@@ -780,20 +788,57 @@ reproduction and extension.
 % =============================================================================
 \section*{Data and Code Availability}
 
-The reference implementation (TypeScript SDK) and the Python eval harness
-described in Section~\ref{sec:eval} --- including the BDP module
-(\texttt{bdp.py}), the deterministic synthetic-corpus generator
-(\texttt{corpus.py}), the four-pipeline benchmark (\texttt{pipelines.py},
-\texttt{run.py}), the ablation runner (\texttt{ablate.py}), and a
-dependency-free correctness test (\texttt{smoke\_test.py}) --- are released
-at \url{https://github.com/UditAkhourii/bdp-clinical-rag} under the MIT licence. The
-synthetic corpus is fully reproducible from a fixed seed
-(\texttt{config.SEED = 42}); running
+The reference implementation and Python eval harness described in
+Section~\ref{sec:eval} are released at
+\url{https://github.com/UditAkhourii/bdp-clinical-rag} under the MIT
+licence. The repository contains:
+
+\begin{itemize}
+  \item \textbf{BDP reference implementation}: \texttt{bdp.py}
+        (HMAC-keyed deterministic tokenization, seven category-specific
+        format-preserving decoders, in-memory vault, lookup detector,
+        redaction baseline).
+  \item \textbf{Synthetic corpus generator}: \texttt{corpus.py}
+        (deterministic from \texttt{SEED=42}; no LLM calls; emits patient
+        roster, longitudinal notes, and category-stratified queries with
+        ground-truth annotations).
+  \item \textbf{Four-pipeline retrieval benchmark}: \texttt{pipelines.py}
+        and \texttt{run.py} (produces Table~\ref{tab:main} and the
+        retrieval columns of Table~\ref{tab:bycategory}).
+  \item \textbf{Ablation runner}: \texttt{ablate.py} (produces
+        Table~\ref{tab:ablation}).
+  \item \textbf{Clinical-accuracy grader}: \texttt{clinical\_accuracy.py}
+        with Gemini / Anthropic / OpenAI backends (produces the clinical
+        accuracy columns of Tables~\ref{tab:main} and
+        \ref{tab:bycategory}).
+  \item \textbf{Dependency-free correctness test}: \texttt{smoke\_test.py}
+        (verifies determinism, format preservation, vault roundtrip,
+        asymmetric divergence, and redaction collapse using only the
+        Python standard library).
+\end{itemize}
+
+The full benchmark regenerates byte-for-byte with:
+
+\begin{center}
 \texttt{python -m corpus \&\& python -m run \&\& python -m ablate}
-regenerates every number in Tables~\ref{tab:main}--\ref{tab:ablation}
-byte-for-byte. A reproducibility \texttt{README} documents the full
-pipeline; expected numbers and seeds are recorded in
-\texttt{results/results.json} and \texttt{results/ablation.json}.
+\end{center}
+
+The raw per-pipeline result files committed to the repository at the time
+of this preprint are:
+
+\begin{itemize}
+  \item Retrieval benchmark (Table~\ref{tab:main}, retrieval columns):
+        \url{https://github.com/UditAkhourii/bdp-clinical-rag/blob/main/eval/results/results.json}
+  \item Ablation study (Table~\ref{tab:ablation}):
+        \url{https://github.com/UditAkhourii/bdp-clinical-rag/blob/main/eval/results/ablation.json}
+  \item Clinical-accuracy grader output (Table~\ref{tab:main} accuracy
+        columns; Table~\ref{tab:bycategory} accuracy columns):
+        \url{https://github.com/UditAkhourii/bdp-clinical-rag/blob/main/eval/results/clinical_accuracy.json}
+\end{itemize}
+
+Human-readable markdown summaries of the same files
+(\texttt{summary.md}, \texttt{ablation.md},
+\texttt{clinical\_accuracy.md}) are also committed in the same directory.
 
 \section*{Author Contributions}
 
