@@ -414,15 +414,28 @@ NumPy) released alongside this paper.
 
 \begin{figure}[t]
 \centering
-\fbox{\parbox{0.9\linewidth}{\centering\textit{Figure 1.} The retrieval-asymmetry bug. Top: write-time embeds raw text; read-time embeds tokenized text; cosine similarity may fall. Bottom (BDP): both sides tokenized identically; similarity preserved.}}
-\caption{Asymmetric vs.\ symmetric write/read pipelines.}
+\includegraphics[width=0.95\linewidth]{figures/fig1_asymmetry.png}
+\caption{Asymmetric vs.\ symmetric write/read pipelines. \emph{Top}: under
+read-only pseudonymization the indexed corpus is embedded raw while the
+query is tokenized; the document and query embeddings land in
+non-overlapping regions of the embedding space and cosine similarity falls
+(retrieval miss), and the indexed corpus still leaks raw PHI to the
+embedding API at ingest time. \emph{Bottom}: under BDP both sides are
+tokenized identically; the embeddings overlap and retrieval succeeds, with
+no PHI crossing the trust boundary.}
 \label{fig:asymmetry}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\fbox{\parbox{0.9\linewidth}{\centering\textit{Figure 2.} BDP architecture: HMAC-keyed deterministic tokenization, format-preserving decoders, mapping vault, and the symmetric ingest/query wrappers around the embedding and LLM APIs.}}
-\caption{BDP architecture.}
+\includegraphics[width=0.95\linewidth]{figures/fig2_architecture.png}
+\caption{BDP architecture. Identifier detection, HMAC-keyed deterministic
+tokenization, format-preserving decoders, and the mapping vault all live in
+the controller-operated trusted zone. The format-preserving decoder is the
+only component that emits text across the trust boundary to the external
+embedding and LLM APIs. The return path detokenizes the LLM response via
+the vault so that authorized downstream consumers (clinicians) see real
+identifiers.}
 \label{fig:bdp}
 \end{figure}
 
@@ -620,19 +633,25 @@ name-shaped decoder.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/fig3_recall.pdf}
+\includegraphics[width=0.95\linewidth]{figures/fig3_recall.png}
 \caption{Retrieval recall@$k$ across the four pipelines, bootstrap
-reproduction. BDP (highlighted) preserves most of Raw's retrieval signal
-while keeping zero identifier leakage; Redaction and Read-only collapse to
-near-zero. Full-scale plot with 95\% bootstrap CIs over 1{,}000 resamples
-to be added in the next revision.}
+reproduction ($n{=}100$ queries; MiniLM-L6-v2 embeddings). BDP
+(highlighted) preserves most of Raw's retrieval signal while keeping zero
+identifier leakage; Redaction and Read-only collapse to near-zero across
+all $k$. Full-scale plot with 95\% bootstrap CIs over 1{,}000 resamples to
+be added in the next revision.}
 \label{fig:recall}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\fbox{\parbox{0.9\linewidth}{\centering\textit{Figure 4.} End-to-end trace of one query under BDP: original question, tokenized query sent to the embedding API, retrieved chunks (also tokenized), LLM response, and detokenized final answer rendered to the clinician.}}
-\caption{End-to-end BDP query trace.}
+\includegraphics[width=0.95\linewidth]{figures/fig4_trace.png}
+\caption{End-to-end trace of one BDP query. The original clinician
+question is tokenized at the trust boundary; the embedding and LLM APIs
+see only the tokenized form (no real names, MRNs, or ABHA IDs); the LLM
+returns a tokenized answer; and the vault detokenizes that answer at the
+controller boundary so the clinician sees the real patient's identity.
+Real PHI appears only in line~24, inside the trusted zone.}
 \label{fig:trace}
 \end{figure}
 
