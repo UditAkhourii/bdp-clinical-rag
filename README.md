@@ -5,6 +5,8 @@ Reference implementation and reproducibility package for the preprint:
 > **Retrieval Asymmetry in PHI-Tokenized Vector Stores: A Silent Failure Mode in Privacy-Preserving Clinical Retrieval-Augmented Generation**
 > *Udit Raj Akhouri, Brane Labs* — medRxiv preprint, 2026.
 
+![The retrieval-asymmetry bug](figures/fig1_asymmetry.png)
+
 ## TL;DR
 
 When a clinical RAG system masks patient identifiers in the user's query but not in the indexed corpus, two things break silently:
@@ -16,6 +18,12 @@ We propose **Bidirectional Deterministic Pseudonymization (BDP)**: a symmetric w
 
 The empirical core of the paper is a numerical-identity ablation: removing HMAC determinism from BDP collapses recall@5 to **exactly 0.018** — matching symmetric redaction. Read-only pseudonymization and randomized-token schemes are the same failure mode in different clothing.
 
+## How BDP works
+
+![BDP architecture](figures/fig2_architecture.png)
+
+Identifier detection, HMAC-keyed deterministic tokenization, format-preserving decoders, and the mapping vault all live in the controller's trusted zone. The format-preserving decoder is the only component that emits text across the trust boundary. The return path detokenizes the LLM response via the vault so clinicians see real identifiers.
+
 ## Headline results (bootstrap reproduction)
 
 | Pipeline | R@5 | Clin. acc. (strict) | ID leak |
@@ -26,6 +34,16 @@ The empirical core of the paper is a numerical-identity ablation: removing HMAC 
 | **BDP (this work)** | **0.320** | **0.267** | **0%** |
 
 20 patients × ~10 longitudinal notes × 100 queries; MiniLM-L6-v2 embeddings; Gemini 2.5 Flash as both generator and grader; deterministic seed 42. Regenerable byte-for-byte with one command (below).
+
+![Retrieval recall@k across pipelines](figures/fig3_recall.png)
+
+## End-to-end query trace
+
+What every party in the system actually sees on one example query:
+
+![End-to-end BDP query trace](figures/fig4_trace.png)
+
+Real PHI appears only at the final detokenization step (line 24), inside the trusted zone. The embedding API and LLM API never receive a real patient name, MRN, or ABHA ID.
 
 ## Repo layout
 
