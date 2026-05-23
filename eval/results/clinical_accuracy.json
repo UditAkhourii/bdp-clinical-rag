@@ -1,0 +1,102 @@
+{
+  "backend": "gemini",
+  "n_sample": 30,
+  "summary": {
+    "raw": {
+      "n_graded": 30,
+      "n_skipped": 0,
+      "accuracy_strict": 0.3333,
+      "accuracy_lenient": 0.4833,
+      "incorrect_rate": 0.3667,
+      "by_category": {
+        "longitudinal": {
+          "n": 10,
+          "acc_strict": 0.5,
+          "acc_lenient": 0.7
+        },
+        "lookup": {
+          "n": 10,
+          "acc_strict": 0.3,
+          "acc_lenient": 0.3
+        },
+        "reasoning": {
+          "n": 10,
+          "acc_strict": 0.2,
+          "acc_lenient": 0.45
+        }
+      }
+    },
+    "redact": {
+      "n_graded": 30,
+      "n_skipped": 0,
+      "accuracy_strict": 0.2,
+      "accuracy_lenient": 0.2333,
+      "incorrect_rate": 0.7333,
+      "by_category": {
+        "longitudinal": {
+          "n": 10,
+          "acc_strict": 0.0,
+          "acc_lenient": 0.0
+        },
+        "lookup": {
+          "n": 10,
+          "acc_strict": 0.0,
+          "acc_lenient": 0.0
+        },
+        "reasoning": {
+          "n": 10,
+          "acc_strict": 0.6,
+          "acc_lenient": 0.7
+        }
+      }
+    },
+    "read_only": {
+      "n_graded": 30,
+      "n_skipped": 0,
+      "accuracy_strict": 0.0,
+      "accuracy_lenient": 0.0,
+      "incorrect_rate": 1.0,
+      "by_category": {
+        "longitudinal": {
+          "n": 10,
+          "acc_strict": 0.0,
+          "acc_lenient": 0.0
+        },
+        "lookup": {
+          "n": 10,
+          "acc_strict": 0.0,
+          "acc_lenient": 0.0
+        },
+        "reasoning": {
+          "n": 10,
+          "acc_strict": 0.0,
+          "acc_lenient": 0.0
+        }
+      }
+    },
+    "bdp": {
+      "n_graded": 30,
+      "n_skipped": 0,
+      "accuracy_strict": 0.2667,
+      "accuracy_lenient": 0.3667,
+      "incorrect_rate": 0.5333,
+      "by_category": {
+        "longitudinal": {
+          "n": 10,
+          "acc_strict": 0.2,
+          "acc_lenient": 0.3
+        },
+        "lookup": {
+          "n": 10,
+          "acc_strict": 0.5,
+          "acc_lenient": 0.5
+        },
+        "reasoning": {
+          "n": 10,
+          "acc_strict": 0.1,
+          "acc_lenient": 0.3
+        }
+      }
+    }
+  }
+}

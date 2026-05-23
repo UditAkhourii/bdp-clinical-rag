@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.env
+.env.local
+.env.*.local
+.venv/
+venv/
+
+# Generated corpus -- regenerable byte-for-byte from SEED via `python -m corpus`.
+# Excluded to keep the repo lean.
+data/*.jsonl
+data/*.json
+!data/.gitkeep
+
+# Eval results ARE committed -- they are the evidence the paper's tables rest on.
+# Regenerable from the corpus via `python -m run && python -m ablate`.

@@ -1,0 +1,150 @@
+[
+  {
+    "pipeline": "raw",
+    "n_notes": 207,
+    "n_queries": 100,
+    "index_seconds": 118.61,
+    "overall": {
+      "mrr": 0.4199,
+      "r@1": 0.0541,
+      "r@5": 0.4305,
+      "r@10": 0.6158
+    },
+    "by_category": {
+      "longitudinal": {
+        "n": 30,
+        "mrr": 0.9,
+        "r@1": 0.0805,
+        "r@5": 0.335,
+        "r@10": 0.5194
+      },
+      "lookup": {
+        "n": 43,
+        "mrr": 0.1804,
+        "r@1": 0.0233,
+        "r@5": 0.3721,
+        "r@10": 0.6279
+      },
+      "reasoning": {
+        "n": 27,
+        "mrr": 0.2679,
+        "r@1": 0.0741,
+        "r@5": 0.6296,
+        "r@10": 0.7037
+      }
+    },
+    "leakage_rate": 1.0,
+    "outbound_payload_count": 307
+  },
+  {
+    "pipeline": "redact",
+    "n_notes": 207,
+    "n_queries": 100,
+    "index_seconds": 5.26,
+    "overall": {
+      "mrr": 0.0534,
+      "r@1": 0.002,
+      "r@5": 0.0182,
+      "r@10": 0.0602
+    },
+    "by_category": {
+      "longitudinal": {
+        "n": 30,
+        "mrr": 0.1584,
+        "r@1": 0.0067,
+        "r@5": 0.0272,
+        "r@10": 0.0673
+      },
+      "lookup": {
+        "n": 43,
+        "mrr": 0.0056,
+        "r@1": 0.0,
+        "r@5": 0.0,
+        "r@10": 0.0465
+      },
+      "reasoning": {
+        "n": 27,
+        "mrr": 0.013,
+        "r@1": 0.0,
+        "r@5": 0.037,
+        "r@10": 0.0741
+      }
+    },
+    "leakage_rate": 0.0,
+    "outbound_payload_count": 307
+  },
+  {
+    "pipeline": "read_only",
+    "n_notes": 207,
+    "n_queries": 100,
+    "index_seconds": 5.73,
+    "overall": {
+      "mrr": 0.0637,
+      "r@1": 0.001,
+      "r@5": 0.0214,
+      "r@10": 0.0461
+    },
+    "by_category": {
+      "longitudinal": {
+        "n": 30,
+        "mrr": 0.2004,
+        "r@1": 0.0033,
+        "r@5": 0.038,
+        "r@10": 0.0871
+      },
+      "lookup": {
+        "n": 43,
+        "mrr": 0.0,
+        "r@1": 0.0,
+        "r@5": 0.0,
+        "r@10": 0.0
+      },
+      "reasoning": {
+        "n": 27,
+        "mrr": 0.0134,
+        "r@1": 0.0,
+        "r@5": 0.037,
+        "r@10": 0.0741
+      }
+    },
+    "leakage_rate": 0.6743,
+    "outbound_payload_count": 307
+  },
+  {
+    "pipeline": "bdp",
+    "n_notes": 207,
+    "n_queries": 100,
+    "index_seconds": 5.92,
+    "overall": {
+      "mrr": 0.3208,
+      "r@1": 0.0526,
+      "r@5": 0.3198,
+      "r@10": 0.5389
+    },
+    "by_category": {
+      "longitudinal": {
+        "n": 30,
+        "mrr": 0.5984,
+        "r@1": 0.042,
+        "r@5": 0.1993,
+        "r@10": 0.3296
+      },
+      "lookup": {
+        "n": 43,
+        "mrr": 0.1628,
+        "r@1": 0.0233,
+        "r@5": 0.3256,
+        "r@10": 0.6047
+      },
+      "reasoning": {
+        "n": 27,
+        "mrr": 0.2638,
+        "r@1": 0.1111,
+        "r@5": 0.4444,
+        "r@10": 0.6667
+      }
+    },
+    "leakage_rate": 0.0,
+    "outbound_payload_count": 307
+  }
+]

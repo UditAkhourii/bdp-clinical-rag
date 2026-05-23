@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "bdp_no_format",
+    "overall": {
+      "mrr": 0.127,
+      "r@1": 0.0053,
+      "r@5": 0.0731,
+      "r@10": 0.1048
+    },
+    "leakage_rate": 0.0
+  },
+  {
+    "variant": "bdp_no_category",
+    "overall": {
+      "mrr": 0.2666,
+      "r@1": 0.0643,
+      "r@5": 0.2322,
+      "r@10": 0.287
+    },
+    "leakage_rate": 0.0
+  },
+  {
+    "variant": "bdp_no_hmac",
+    "overall": {
+      "mrr": 0.056,
+      "r@1": 0.0031,
+      "r@5": 0.0184,
+      "r@10": 0.0655
+    },
+    "leakage_rate": 0.0
+  }
+]
