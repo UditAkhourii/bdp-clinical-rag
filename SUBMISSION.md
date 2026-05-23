@@ -12,7 +12,7 @@ of the four blockers identified at the v0.1 stage:
 
 | # | Blocker | Status |
 |---|---|---|
-| 1 | Author block placeholders | **Partially fixed.** First author = Udit Raj Akhouri, Brane Labs, udit@branelabs.org. Two co-author slots (clinical informaticist, ML/privacy methodologist) still TBD — decide whether to submit solo and add at revision, or wait. |
+| 1 | Author block placeholders | ✅ **Fixed.** Submitting as solo first author: Udit Raj Akhouri, Brane Labs, udit@branelabs.org. Co-authors will be recruited and added at the first preprint revision alongside the full-scale eval. |
 | 2 | GitHub URLs were `[org]/[repo]` | ✅ **Fixed.** Code lives at <https://github.com/UditAkhourii/bdp-clinical-rag>, MIT licensed. Data & Code Availability paragraph in `main.tex` updated. |
 | 3 | Figures 1–4 were `\fbox` stubs | **Partially fixed.** Fig 3 is auto-rendered from real eval data (`figures/render_fig3.py`, output committed). Figs 1, 2, 4 still need to be created — see `figures/FIGURE_PROMPTS.md` for prompts/instructions. |
 | 4 | Bootstrap-scale numbers | **Accepted for preprint.** The bootstrap reproduction establishes the qualitative shape of every claim. Full-scale (1k patients / `text-embedding-3-large`) is planned for the first preprint revision and the eventual JAMIA submission. The abstract and §6.2 already frame the current numbers as bootstrap. |
@@ -72,7 +72,7 @@ Quality Improvement* — but Health Informatics is the right one.)
 
 **Competing Interests**
 
-> The first author is the founder of Brane Labs, a company that commercializes compliance tooling for healthcare AI startups. The BDP reference implementation is a subset of Brane Labs' open-source SDK. The synthetic corpus and evaluation protocol contain no proprietary content, and the released code is independently runnable. The other authors declare no competing interests.
+> The author is the founder of Brane Labs, a company that commercializes compliance tooling for healthcare AI startups. The BDP reference implementation is a subset of Brane Labs' open-source SDK. The synthetic corpus and evaluation protocol contain no proprietary content, and the released code is independently runnable.
 
 **Declarations** — medRxiv asks several yes/no questions. Suggested answers for this paper:
 
@@ -108,7 +108,7 @@ repo URL the moment it's public.)
 
 For each author, medRxiv collects: first name, last name, email, affiliation, ORCID (optional), corresponding-author flag, contribution statement.
 
-**Author 1 (corresponding):**
+**Single author (corresponding):**
 - First name: Udit Raj
 - Last name: Akhouri
 - Title (for cover letter only — not for byline): Lead Researcher, Brane Labs
@@ -116,13 +116,9 @@ For each author, medRxiv collects: first name, last name, email, affiliation, OR
 - Affiliation: Brane Labs, Bengaluru, India
 - ORCID: *[fill if you have one]*
 - Corresponding author: **Yes**
-- Contribution: Conceived the failure-mode framing; designed BDP; implemented the reference SDK and the Python eval harness; ran the bootstrap reproduction; drafted the manuscript.
+- Contribution: Conceived the failure-mode framing; designed BDP and its formal model; implemented the reference SDK and the Python eval harness; ran the bootstrap reproduction including ablation and clinical-accuracy grading; drafted the manuscript.
 
-**Author 2 — clinical informaticist (TBD):**
-- Decide before submission whether they're in. If they will be added at revision, submit solo.
-
-**Author 3 — ML/privacy methodologist (TBD):**
-- Same.
+Co-authors (clinical informaticist; ML/privacy methodologist) will be added at the first preprint revision.
 
 ---
 
@@ -191,10 +187,8 @@ medRxiv generates a proof PDF; verify:
 2. Tables 1, 2, 3 render with the right column alignment.
 3. Every `\cite{}` resolves to a numbered reference and the bibliography
    has all 20 entries.
-4. Search the proof for the string `[Co-Author --- TBD]` and
-   `[Institution --- TBD]` — those are the only intentional placeholders
-   remaining. The `[org]/[repo]`, `[Surname]`, and `[Initials]` ones are
-   all fixed.
+4. Search the proof for `TBD` or `[`. There should be zero matches — all
+   placeholders have been resolved for solo submission.
 5. Search for `placeholder` and `TBD` for the same reason.
 
 ---
